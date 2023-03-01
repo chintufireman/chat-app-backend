@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "spring.websocket.sockjs.cors.allowed-origins",
+  "type": "java.lang.String",
+  "description": "A description for 'spring.websocket.sockjs.cors.allowed-origins'"
+}]}
