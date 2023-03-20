@@ -1,7 +1,14 @@
 package com.chatapp.service;
 
+import java.util.List;
+
 import com.chatapp.entity.User;
+import com.chatapp.model.LoginDetails;
 
 public interface UserService {
-    public User savUser(User user);
+    public User saveUser(User user);
+    public User getUser(LoginDetails details) throws Exception;
+    public List<User> getAllUsers();
+    public User searchUser(String userName);
+    public List<User> getAllReceiversFromTheSender(String senderId);
 }

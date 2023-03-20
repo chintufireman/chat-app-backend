@@ -1,6 +1,6 @@
 package com.chatapp.model;
 
-public class Message {
+public class MessageRequest {
     private String name;
     private String content;
 
@@ -20,11 +20,11 @@ public class Message {
         this.content = content;
     }
 
-    public Message(String name, String content) {
+    public MessageRequest(String name, String content) {
         this.name = name;
         this.content = content;
     }
 
-    public Message() {
+    public MessageRequest() {
     }
 }
