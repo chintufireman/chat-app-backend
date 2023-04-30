@@ -68,8 +68,7 @@ public class UserServiceImpl implements UserService {
 		List<String> receiverIds = this.getReceiverIdsBySenderId(senderId);
 
 		// this.userRepo.findAllById(reciversIds) by using this it will hit database for
-		// reciverId instead
-		// of that use mongotemplate
+		// reciverId, instead of that  use mongotemplate
 		List<User> users= mongoTemplate.find(
 				Query.query(Criteria.where("email").in(receiverIds)),
 				User.class);
@@ -81,7 +80,7 @@ public class UserServiceImpl implements UserService {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("sender_id").is(senderId));
 		query.fields().include("reciver_id");
-		List<String> receiverIds = mongoTemplate.findDistinct(query, "reciverId", Message.class, String.class);
+		List<String> receiverIds = mongoTemplate.findDistinct(query, "reciver_id", Message.class, String.class);
 		// we have to specify Message.class to show that document class that is being
 		// queried
 		return receiverIds;
