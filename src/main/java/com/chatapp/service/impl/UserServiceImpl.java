@@ -1,5 +1,6 @@
 package com.chatapp.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -9,10 +10,13 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import com.chatapp.config.AppConstants;
 import com.chatapp.entity.Message;
+import com.chatapp.entity.Roles;
 import com.chatapp.entity.User;
 import com.chatapp.model.LoginDetails;
 import com.chatapp.repository.MessageRepo;
+import com.chatapp.repository.RolesRepo;
 import com.chatapp.repository.UserRepo;
 import com.chatapp.service.UserService;
 
@@ -27,18 +31,23 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private MessageRepo messageRepo;
 
+	@Autowired
+	private RolesRepo rolesRepo;
+
 	@Override
 	public User saveUser(User user) {
 		user.setId(UUID.randomUUID().toString());
-		// user.setPassword(this.passwordEncoder.encode(user.getPassword()));
-
+		Roles role = this.rolesRepo.findByRole("USER").get();
+		List<Roles> roles = new ArrayList<Roles>();
+		roles.add(role);
+		user.setRoles(roles);
 		User u = userRepo.save(user);
 		return u;
 	}
 
 	@Override
 	public User getUser(LoginDetails loginDetails) throws Exception {
-		User u = userRepo.findByEmail(loginDetails.getEmail()).orElseThrow(() -> new Exception("User not found"));
+		User u = userRepo.findByEmail(loginDetails.getUsername()).orElseThrow(() -> new Exception("User not found"));
 		if (u.getPassword().equals(loginDetails.getPassword())) {
 			return u;
 		}
@@ -68,11 +77,9 @@ public class UserServiceImpl implements UserService {
 		List<String> receiverIds = this.getReceiverIdsBySenderId(senderId);
 
 		// this.userRepo.findAllById(reciversIds) by using this it will hit database for
-		// reciverId, instead of that  use mongotemplate
-		List<User> users= mongoTemplate.find(
-				Query.query(Criteria.where("email").in(receiverIds)),
-				User.class);
-				return users;
+		// reciverId, instead of that use mongotemplate
+		List<User> users = mongoTemplate.find(Query.query(Criteria.where("email").in(receiverIds)), User.class);
+		return users;
 
 	}
 

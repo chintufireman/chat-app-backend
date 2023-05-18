@@ -19,6 +19,17 @@
 	</properties>
 	<dependencies>
 
+		<!-- <dependency> <groupId>io.jsonwebtoken</groupId> <artifactId>jjwt-api</artifactId> 
+			<version>0.11.5</version> </dependency> <dependency> <groupId>io.jsonwebtoken</groupId> 
+			<artifactId>jjwt-impl</artifactId> <version>0.11.5</version> <scope>runtime</scope> 
+			</dependency> -->
+
+		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
 		
 
 		<dependency>
@@ -71,8 +82,10 @@
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
 
-		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-security</artifactId> 
-			</dependency> -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation -->
 		<dependency>
@@ -81,8 +94,7 @@
 		</dependency>
 
 		<dependency>
-			<!-- this will help in creating unique constraint on email in 
-			User Document -->
+			<!-- this will help in creating unique constraint on email in User Document -->
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 		</dependency>
@@ -94,7 +106,6 @@
 			<artifactId>spring-security-core</artifactId> <version>6.0.2</version> </dependency> 
 			<dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-config</artifactId> 
 			<version>6.0.2</version> </dependency> -->
-
 	</dependencies>
 
 	<build>

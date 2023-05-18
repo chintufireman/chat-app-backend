@@ -1,5 +1,12 @@
 package com.chatapp.config;
 
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -16,7 +23,7 @@ public class CorsConfig implements WebMvcConfigurer {
 		.exposedHeaders("*")
 		.allowCredentials(true);
 	}
-
+	
 	/*
 	 * The allowedHeaders property of CORS configuration specifies which HTTP
 	 * headers can be used in a cross-origin request. The browser will only allow
