@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chatapp.entity.User;
-import com.chatapp.model.LoginDetails;
+import com.chatapp.payloads.LoginDetails;
 import com.chatapp.service.UserService;
 
 @RestController

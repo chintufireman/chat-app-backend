@@ -1,7 +1,16 @@
-package com.chatapp.jwt;
+package com.chatapp.payloads;
 
 public class JwtAuthResponse {
 	private String token;
+	UserDto user;
+
+	public UserDto getUser() {
+		return user;
+	}
+
+	public void setUser(UserDto user) {
+		this.user = user;
+	}
 
 	public String getToken() {
 		return token;

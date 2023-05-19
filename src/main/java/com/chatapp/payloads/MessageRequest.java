@@ -1,4 +1,4 @@
-package com.chatapp.model;
+package com.chatapp.payloads;
 
 public class MessageRequest {
     private String name;

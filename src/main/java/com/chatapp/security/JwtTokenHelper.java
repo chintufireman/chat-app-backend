@@ -1,4 +1,4 @@
-package com.chatapp.jwt;
+package com.chatapp.security;
 
 import java.util.Date;
 import java.util.HashMap;

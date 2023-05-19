@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chatapp.entity.Message;
 import com.chatapp.entity.User;
-import com.chatapp.model.LoginDetails;
-import com.chatapp.model.MessageRequest;
+import com.chatapp.payloads.LoginDetails;
+import com.chatapp.payloads.MessageRequest;
 import com.chatapp.payloads.PrivateChatsOfTwoUsers;
 import com.chatapp.service.MessageService;
 import com.chatapp.service.UserService;

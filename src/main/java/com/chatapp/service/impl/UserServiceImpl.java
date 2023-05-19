@@ -14,7 +14,7 @@ import com.chatapp.config.AppConstants;
 import com.chatapp.entity.Message;
 import com.chatapp.entity.Roles;
 import com.chatapp.entity.User;
-import com.chatapp.model.LoginDetails;
+import com.chatapp.payloads.LoginDetails;
 import com.chatapp.repository.MessageRepo;
 import com.chatapp.repository.RolesRepo;
 import com.chatapp.repository.UserRepo;

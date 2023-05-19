@@ -24,9 +24,9 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import com.chatapp.jwt.JwtAuthenticationEntryPoint;
-import com.chatapp.jwt.JwtAuthenticationFilter;
 import com.chatapp.security.CustomUserDetailsService;
+import com.chatapp.security.JwtAuthenticationEntryPoint;
+import com.chatapp.security.JwtAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -34,7 +34,7 @@ import com.chatapp.security.CustomUserDetailsService;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	private static final String PUBLIC_URLS[] = { "/token/**","/webjars/**","/api/v1/user-handle/","/api/v1/user-handle/create","/createRole" };
+	private static final String PUBLIC_URLS[] = { "/token/**","/webjars/**","/api/v1/user-handle/login","/createRole" };
 
 	@Autowired
 	private CustomUserDetailsService customUserService;
@@ -47,11 +47,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// learn everything about this chaining
-		http.cors().and().authorizeHttpRequests().antMatchers(PUBLIC_URLS).permitAll().antMatchers(HttpMethod.GET)
-				.permitAll().anyRequest().authenticated().and().exceptionHandling()
-				.authenticationEntryPoint(this.authenticationEntryPoint).and().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		//http.cors() method was really as it was enabling cors support with 
+		// spring security and was able to authorize resources on the mappings 
+		//provided in public urls else i was getting eeror from frontend cors not
+		//allowed
+		http.cors()
+		.and()
+		.authorizeHttpRequests()
+		.antMatchers(PUBLIC_URLS)
+		.permitAll()
+		.antMatchers(HttpMethod.GET)
+		.permitAll()
+		.anyRequest()
+		.authenticated()
+		.and()
+		.exceptionHandling()
+		.authenticationEntryPoint(this.authenticationEntryPoint)
+		.and()
+		.sessionManagement()
+		.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		
 		http.csrf().disable();
 		http.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
 	}

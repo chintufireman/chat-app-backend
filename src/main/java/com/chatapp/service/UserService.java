@@ -3,7 +3,7 @@ package com.chatapp.service;
 import java.util.List;
 
 import com.chatapp.entity.User;
-import com.chatapp.model.LoginDetails;
+import com.chatapp.payloads.LoginDetails;
 
 public interface UserService {
     public User saveUser(User user);

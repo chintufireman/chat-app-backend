@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chatapp.jwt.JwtAuthRequest;
-import com.chatapp.jwt.JwtAuthResponse;
-import com.chatapp.jwt.JwtTokenHelper;
+import com.chatapp.entity.User;
+import com.chatapp.payloads.JwtAuthRequest;
+import com.chatapp.payloads.JwtAuthResponse;
+import com.chatapp.payloads.LoginDetails;
+import com.chatapp.payloads.UserDto;
+import com.chatapp.security.JwtTokenHelper;
+import com.chatapp.service.UserService;
 
 @RestController
 public class AuthenticationController {
@@ -27,6 +31,8 @@ public class AuthenticationController {
 	@Autowired
 	AuthenticationManager authenticationManager;
 	
+	@Autowired
+	private UserService service;
 	
 	@PostMapping("/token")
 	public ResponseEntity<JwtAuthResponse> createToken(@RequestBody JwtAuthRequest request ) throws Exception{
@@ -39,6 +45,21 @@ public class AuthenticationController {
 		
 		JwtAuthResponse response = new JwtAuthResponse(); 
 		response.setToken(token);
+		
+		//Logindetails to replicate get user functionality from email and password
+		LoginDetails login = new LoginDetails();
+		login.setPassword(request.getPassword());
+		login.setUsername(request.getUsername());
+		
+		//get user
+		User getUser = service.getUser(login);
+		
+		UserDto user = new UserDto();
+		user.setName(getUser.getName());
+		user.setUsername(getUser.getEmail());
+		
+		//set user
+		response.setUser(user);
 		
 		return new ResponseEntity<JwtAuthResponse>(response,HttpStatus.OK);
 	}
