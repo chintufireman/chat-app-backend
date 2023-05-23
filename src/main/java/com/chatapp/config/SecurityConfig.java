@@ -34,7 +34,7 @@ import com.chatapp.security.JwtAuthenticationFilter;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	private static final String PUBLIC_URLS[] = { "/token/**","/webjars/**","/api/v1/user-handle/login","/createRole" };
+	private static final String PUBLIC_URLS[] = { "/token/**","/webjars/**","/api/v1/user-handle/login","/createRole","/api/v1/user-handle/create" };
 
 	@Autowired
 	private CustomUserDetailsService customUserService;
