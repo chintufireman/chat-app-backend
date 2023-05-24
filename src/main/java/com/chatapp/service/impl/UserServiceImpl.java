@@ -1,6 +1,9 @@
 package com.chatapp.service.impl;
 
 import java.util.ArrayList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -22,6 +25,8 @@ import com.chatapp.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
+	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
 	@Autowired
 	private UserRepo userRepo;
 
@@ -36,20 +41,30 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User saveUser(User user) {
-		user.setId(UUID.randomUUID().toString());
-		Roles role = this.rolesRepo.findByRole("USER").get();
-		List<Roles> roles = new ArrayList<Roles>();
-		roles.add(role);
-		user.setRoles(roles);
-		User u = userRepo.save(user);
-		return u;
+		try {
+			user.setId(UUID.randomUUID().toString());
+			Roles role = this.rolesRepo.findByRole("USER").get();
+			List<Roles> roles = new ArrayList<Roles>();
+			roles.add(role);
+			user.setRoles(roles);
+			User u = userRepo.save(user);
+			return u;
+		}
+		catch(Exception e) {
+			logger.error("Error occured", e);
+		}
+		return null;
 	}
 
 	@Override
 	public User getUser(LoginDetails loginDetails) throws Exception {
-		User u = userRepo.findByEmail(loginDetails.getUsername()).orElseThrow(() -> new Exception("User not found"));
-		if (u.getPassword().equals(loginDetails.getPassword())) {
-			return u;
+		try{User u = userRepo.findByEmail(loginDetails.getUsername()).orElseThrow(() -> new Exception("User not found"));
+			if (u.getPassword().equals(loginDetails.getPassword())) {
+				return u;
+			}
+		}
+		catch (Exception e) {
+			logger.error("an error occured", e);
 		}
 		return null;
 	}

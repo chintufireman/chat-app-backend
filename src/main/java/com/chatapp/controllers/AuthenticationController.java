@@ -19,9 +19,14 @@ import com.chatapp.payloads.LoginDetails;
 import com.chatapp.payloads.UserDto;
 import com.chatapp.security.JwtTokenHelper;
 import com.chatapp.service.UserService;
+import com.chatapp.service.impl.UserServiceImpl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 @RestController
 public class AuthenticationController {
+	private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
+
 	@Autowired
 	private JwtTokenHelper helper;
 	
@@ -36,31 +41,35 @@ public class AuthenticationController {
 	
 	@PostMapping("/token")
 	public ResponseEntity<JwtAuthResponse> createToken(@RequestBody JwtAuthRequest request ) throws Exception{
-		
-		this.authenticate(request.getUsername(),request.getPassword());
-		
-		UserDetails userdetails = this.detailsService.loadUserByUsername(request.getUsername());
-		
-		String token = this.helper.generateToken(userdetails);
-		
 		JwtAuthResponse response = new JwtAuthResponse(); 
-		response.setToken(token);
+		try {
+			this.authenticate(request.getUsername(),request.getPassword());
 		
-		//Logindetails to replicate get user functionality from email and password
-		LoginDetails login = new LoginDetails();
-		login.setPassword(request.getPassword());
-		login.setUsername(request.getUsername());
+			UserDetails userdetails = this.detailsService.loadUserByUsername(request.getUsername());
 		
-		//get user
-		User getUser = service.getUser(login);
+			String token = this.helper.generateToken(userdetails);
 		
-		UserDto user = new UserDto();
-		user.setName(getUser.getName());
-		user.setUsername(getUser.getEmail());
+			
+			response.setToken(token);
 		
-		//set user
-		response.setUser(user);
+			//Logindetails to replicate get user functionality from email and password
+			LoginDetails login = new LoginDetails();
+			login.setPassword(request.getPassword());
+			login.setUsername(request.getUsername());
 		
+			//get user
+				User getUser = service.getUser(login);
+		
+				UserDto user = new UserDto();
+				user.setName(getUser.getName());
+				user.setUsername(getUser.getEmail());
+		
+				//set user
+				response.setUser(user);
+		}
+		catch(Exception e) {
+			logger.error("Error in authentication controller", e);
+		}
 		return new ResponseEntity<JwtAuthResponse>(response,HttpStatus.OK);
 	}
 

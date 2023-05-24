@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		//http.cors() method was really as it was enabling cors support with 
+		//http.cors() method was really important as it was enabling cors support with 
 		// spring security and was able to authorize resources on the mappings 
 		//provided in public urls else i was getting eeror from frontend cors not
 		//allowed

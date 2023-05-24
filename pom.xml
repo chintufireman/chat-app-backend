@@ -19,18 +19,13 @@
 	</properties>
 	<dependencies>
 
-		<!-- <dependency> <groupId>io.jsonwebtoken</groupId> <artifactId>jjwt-api</artifactId> 
-			<version>0.11.5</version> </dependency> <dependency> <groupId>io.jsonwebtoken</groupId> 
-			<artifactId>jjwt-impl</artifactId> <version>0.11.5</version> <scope>runtime</scope> 
-			</dependency> -->
-
 		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
 		</dependency>
-		
+
 
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -77,6 +72,7 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
@@ -98,14 +94,6 @@
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 		</dependency>
-
-		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-messaging</artifactId> 
-			<version>5.3.25</version> </dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-messaging</artifactId> <version>6.0.2</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-core</artifactId> <version>6.0.2</version> </dependency> 
-			<dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-config</artifactId> 
-			<version>6.0.2</version> </dependency> -->
 	</dependencies>
 
 	<build>
