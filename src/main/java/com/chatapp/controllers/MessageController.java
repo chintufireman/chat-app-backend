@@ -3,7 +3,9 @@ package com.chatapp.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -38,13 +40,17 @@ public class MessageController {
 	@MessageMapping("/chatTo")
 	@SendTo("/topic/return-to")
 	@CrossOrigin("*")
-	public MessageRequest getContent(@RequestBody MessageRequest message) {
+	public ResponseEntity<MessageRequest> getContent(@RequestBody MessageRequest message) {
 		try {
 			// Thread.sleep(1000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return message;
+		HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/javascript");
+
+        return new ResponseEntity<>(message, headers, HttpStatus.OK);
+
 	}
 
 	@MessageMapping("/private/{from}/{to}")

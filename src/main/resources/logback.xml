@@ -12,9 +12,9 @@
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
-        <file>/var/log/spring.log</file>
+        <file>C:/Users/Firing Machine/Desktop/spring.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/var/log/spring.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <fileNamePattern>C:/Users/Firing Machine/Desktop/spring.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
     </appender>
@@ -23,5 +23,5 @@
         <appender-ref ref="Console" />
         <appender-ref ref="File" />
     </root>
-    <logger name="com.chatapp" level="info" />
+    <logger name="com.chatapp" level="trace" />
 </configuration>
