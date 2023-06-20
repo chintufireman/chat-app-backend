@@ -67,6 +67,8 @@ public class MessageController {
 		Message savedMsg = this.messageService.saveMessage(msg);
 
 		this.messagingTemplate.convertAndSend(chatUrl, message);
+		
+		
 		return message;
 
 	}

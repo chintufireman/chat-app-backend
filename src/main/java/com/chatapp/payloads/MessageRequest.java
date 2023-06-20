@@ -1,10 +1,24 @@
 package com.chatapp.payloads;
 
+import com.chatapp.redis.entity.User;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class MessageRequest {
     private String name;
     private String content;
+    
+    @JsonProperty("user")
+    private User user;
+    
+    public User getUser() {
+		return user;
+	}
 
-    public String getName() {
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public String getName() {
         return name;
     }
 

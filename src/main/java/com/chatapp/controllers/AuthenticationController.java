@@ -19,7 +19,6 @@ import com.chatapp.payloads.LoginDetails;
 import com.chatapp.payloads.UserDto;
 import com.chatapp.security.JwtTokenHelper;
 import com.chatapp.service.UserService;
-import com.chatapp.service.impl.UserServiceImpl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +37,8 @@ public class AuthenticationController {
 	
 	@Autowired
 	private UserService service;
+	
+	
 	
 	@PostMapping("/token")
 	public ResponseEntity<JwtAuthResponse> createToken(@RequestBody JwtAuthRequest request ) throws Exception{
